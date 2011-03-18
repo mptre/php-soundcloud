@@ -261,6 +261,36 @@ class Services_Soundcloud {
     }
 
     /**
+     * Retrieve access token using username / password.
+     *
+     * @param string $username Username of the Soundcloud user
+     * @param string $username Password
+     * @param array $postData Optional post data
+     * @param array $curlOptions Optional cURL options
+     *
+     * @return mixed
+     * @see Soundcloud::_getAccessToken()
+     */
+    function passwordAccessToken($username, $password, $postData = array(), $curlOptions = array()) {
+        $defaultPostData = array(
+            'username' => $username,
+            'password' => $password,
+            'client_id' => $this->_clientId,
+            'client_secret' => $this->_clientSecret,
+            'grant_type' => 'password'
+        );
+        $postData = array_merge($defaultPostData, $postData);
+		
+		$defaultCurlOptions = array(
+			CURLOPT_SSL_VERIFYHOST => 0,
+			CURLOPT_SSL_VERIFYPEER => 0
+		);
+		$curlOptions = $defaultCurlOptions + $curlOptions;
+		
+        return $this->_getAccessToken($postData, $curlOptions);
+    }
+
+    /**
      * Refresh access token.
      *
      * @param string $refreshToken
