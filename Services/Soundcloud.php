@@ -924,7 +924,10 @@ class Services_Soundcloud
         $this->_lastHttpResponseHeaders = $this->_parseHttpHeaders(
             substr($data, 0, $info['header_size'])
         );
-        $this->_lastHttpResponseBody = substr($data, $info['header_size']);
+        if(array_key_exists(CURLOPT_HEADER, $options) && !$options[CURLOPT_HEADER])
+    		$this->_lastHttpResponseBody = $data;
+		else
+        	$this->_lastHttpResponseBody = substr($data, $info['header_size']);
         $this->_lastHttpResponseCode = $info['http_code'];
 
         if ($this->_validResponseCode($this->_lastHttpResponseCode)) {
