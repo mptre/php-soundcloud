@@ -100,7 +100,7 @@ $track = array(
     'track[tags]' => 'dubstep rofl',
     'track[asset_data]' => '@/absolute/path/to/track.mp3'
 );
-    
+
 try {
     $response = $soundcloud->post('tracks', $track);
 } catch (Services_Soundcloud_Invalid_Http_Response_Code_Exception $e) {
