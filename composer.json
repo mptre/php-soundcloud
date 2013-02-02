@@ -1,0 +1,24 @@
+{
+    "name": "mptre/php-soundcloud",
+    "description": "API Wrapper for SoundCloud written in PHP with support for authentication using OAuth 2.0",
+    "version": "3.0.0",
+    "keywords": ["soundcloud"],
+    "homepage": "https://github.com/mptre/php-soundcloud",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anton Lindqvist",
+            "email": "anton@qvister.se",
+            "homepage": "http://qvister.se/"
+        }
+    ],
+    "require": {
+        "php": ">=5.3"
+    },
+    "autoload": {
+        "psr-0": {
+            "Soundcloud": "src/"
+        }
+    }
+}

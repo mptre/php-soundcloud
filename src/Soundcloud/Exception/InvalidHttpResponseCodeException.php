@@ -1,4 +1,9 @@
 <?php
+
+namespace Soundcloud\Exception;
+
+use \Exception;
+
 /**
  * Soundcloud missing client id exception.
  *
@@ -9,7 +14,7 @@
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @link http://github.com/mptre/php-soundcloud
  */
-class Services_Soundcloud_Missing_Client_Id_Exception extends Exception {
+class MissingClientIdException extends Exception {
 
     /**
      * Default message.
@@ -32,7 +37,7 @@ class Services_Soundcloud_Missing_Client_Id_Exception extends Exception {
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @link http://github.com/mptre/php-soundcloud
  */
-class Services_Soundcloud_Invalid_Http_Response_Code_Exception extends Exception {
+class InvalidHttpResponseCodeException extends Exception {
 
     /**
      * HTTP response body.
@@ -71,7 +76,7 @@ class Services_Soundcloud_Invalid_Http_Response_Code_Exception extends Exception
      *
      * @return void
      */
-    function __construct($message = null, $code = 0, $httpBody = null, $httpCode = 0) {
+    public function __construct($message = null, $code = 0, $httpBody = null, $httpCode = 0) {
         $this->httpBody = $httpBody;
         $this->httpCode = $httpCode;
         $message = sprintf($this->message, $httpCode);
@@ -84,7 +89,7 @@ class Services_Soundcloud_Invalid_Http_Response_Code_Exception extends Exception
      *
      * @return mixed
      */
-    function getHttpBody() {
+    public function getHttpBody() {
         return $this->httpBody;
     }
 
@@ -93,7 +98,7 @@ class Services_Soundcloud_Invalid_Http_Response_Code_Exception extends Exception
      *
      * @return mixed
      */
-    function getHttpCode() {
+    public function getHttpCode() {
         return $this->httpCode;
     }
 
@@ -109,7 +114,7 @@ class Services_Soundcloud_Invalid_Http_Response_Code_Exception extends Exception
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @link http://github.com/mptre/php-soundcloud
  */
-class Services_Soundcloud_Unsupported_Response_Format_Exception extends Exception {
+class UnsupportedResponseFormatException extends Exception {
 
     /**
      * Default message.
@@ -132,7 +137,7 @@ class Services_Soundcloud_Unsupported_Response_Format_Exception extends Exceptio
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @link http://github.com/mptre/php-soundcloud
  */
-class Services_Soundcloud_Unsupported_Audio_Format_Exception extends Exception {
+class UnsupportedAudioFormatException extends Exception {
 
     /**
      * Default message.
