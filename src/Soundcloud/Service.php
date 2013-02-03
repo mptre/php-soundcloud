@@ -212,14 +212,14 @@ class Service
      * @param boolean $development  Sandbox mode
      *
      * @return void
-     * @throws Exception/MissingClientIdException
+     * @throws Exception\MissingClientIdException
      *
      * @access public
      */
     public function __construct($clientId, $clientSecret, $redirectUri = null, $development = false)
     {
         if (empty($clientId)) {
-            throw new Exception/MissingClientIdException();
+            throw new Exception\MissingClientIdException();
         }
 
         $this->_clientId = $clientId;
@@ -384,7 +384,7 @@ class Service
      * @param string $extension Given extension
      *
      * @return string
-     * @throws Exception/UnsupportedAudioFormatException
+     * @throws Exception\UnsupportedAudioFormatException
      *
      * @access public
      */
@@ -393,7 +393,7 @@ class Service
         if (array_key_exists($extension, self::$_audioMimeTypes)) {
             return self::$_audioMimeTypes[$extension];
         } else {
-            throw new Exception/UnsupportedAudioFormatException();
+            throw new Exception\UnsupportedAudioFormatException();
         }
     }
 
@@ -542,7 +542,7 @@ class Service
      * @param string $format Response format, could either be XML or JSON
      *
      * @return object
-     * @throws Exception/UnsupportedResponseFormatException
+     * @throws Exception\UnsupportedResponseFormatException
      *
      * @access public
      */
@@ -551,7 +551,7 @@ class Service
         if (array_key_exists($format, self::$_responseFormats)) {
             $this->_responseFormat = self::$_responseFormats[$format];
         } else {
-            throw new Exception/UnsupportedResponseFormatException();
+            throw new Exception\UnsupportedResponseFormatException();
         }
 
         return $this;
@@ -876,7 +876,7 @@ class Service
      * @param array  $curlOptions Optional cURL options
      *
      * @return mixed
-     * @throws Exception/InvalidHttpResponseCodeException
+     * @throws Exception\InvalidHttpResponseCodeException
      *
      * @access protected
      */
@@ -925,7 +925,7 @@ class Service
         if ($this->_validResponseCode($this->_lastHttpResponseCode)) {
             return $this->_lastHttpResponseBody;
         } else {
-            throw new Exception/InvalidHttpResponseCodeException(
+            throw new Exception\InvalidHttpResponseCodeException(
             null, 0, $this->_lastHttpResponseBody, $this->_lastHttpResponseCode
             );
         }
