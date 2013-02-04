@@ -1,5 +1,5 @@
 {
-    "name": "internalsystemerror/php-soundcloud",
+    "name": "ise/php-soundcloud",
     "description": "API Wrapper for SoundCloud written in PHP with support for authentication using OAuth 2.0 by Anton Lindqvist (mptre), composer support added by Gary Lockett (ise)",
     "version": "3.0.0",
     "keywords": ["soundcloud"],
