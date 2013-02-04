@@ -3,7 +3,6 @@
 namespace SoundcloudTest;
 
 use Soundcloud\Service;
-use Soundcloud\Exception\InvalidHttpResponseCodeException;
 
 class ServiceTest extends \PHPUnit_Framework_TestCase
 {
