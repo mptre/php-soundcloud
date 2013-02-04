@@ -252,29 +252,6 @@ HEADERS;
 
     /**
      * @covers Soundcloud\Service::get
-     * @covers Soundcloud\Service::getHttpHeader
-     * @covers Soundcloud\Exception\InvalidHttpResponseCodeException::getHttpBody
-     * @covers Soundcloud\Exception\InvalidHttpResponseCodeException::getHttpCode
-     * @dataProvider dataProviderSoundcloudInvalidHttpResponseCode
-     */
-    public function testSoundcloudInvalidHttpResponseCode($expectedHeaders)
-    {
-        try {
-            $this->object->get('me');
-        } catch (InvalidHttpResponseCodeException $e) {
-            $this->assertEquals(
-                '{"error":"401 - Unauthorized"}', $e->getHttpBody()
-            );
-            $this->assertEquals(401, $e->getHttpCode());
-
-            foreach ($expectedHeaders as $key => $value) {
-                $this->assertEquals($value, $this->object->getHttpHeader($key));
-            }
-        }
-    }
-
-    /**
-     * @covers Soundcloud\Service::get
      */
     public function testSoundcloudInvalidHttpResponseCodeException()
     {
