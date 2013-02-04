@@ -1,10 +1,16 @@
 # SoundCloud PHP API Wrapper
 
+Master: [![Build Status](https://travis-ci.org/internalsystemerror/php-soundcloud.png?branch=master)](https://travis-ci.org/internalsystemerror/php-soundcloud)
+
+## RELEASE INFORMATION
+
+*v3.0.0*
+
 ## Introduction
 
 A wrapper for the SoundCloud API written in PHP with support for authentication using [OAuth 2.0](http://oauth.net/2/).
 
-The wrapper got a real overhaul with version 2.0. The current version was written with [Composer](http://getcomposer.org/) in mind and can be easily distributed as a composer package.
+The current version was written with [Composer](http://getcomposer.org/) in mind and can be easily distributed as a composer package.
 
 ## Requirements
 
