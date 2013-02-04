@@ -18,19 +18,8 @@ Check out the [getting started](https://github.com/mptre/php-soundcloud/wiki/OAu
 
  1.  Require php-soundcloud in your project's composer.json:
 
-*(Note: For now until this can be published on packagist.org, explicitly specify the git repository and the composer branch)*
-```json
-{
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git://github.com/internalsystemerror/php-soundcloud.git"
-        }
-    ],
-    "require": {
-        "mptre/php-soundcloud": "dev-composer"
-    }
-}
+```sh
+composer require ise/php-soundcloud dev-master
 ```
 
 
