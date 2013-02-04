@@ -12,3 +12,5 @@ matrix:
 before_install:
   - composer self-update
   - composer install
+
+script: phpunit -c tests/phpunit.xml
