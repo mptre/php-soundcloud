@@ -1,10 +1,11 @@
 language: php
 php:
-  - 5.3.2
   - 5.3
   - 5.4
   - 5.5
 matrix:
   allow_failures:
     - php: 5.5
-before_install: composer install --dev --prefer-source
+before_install:
+  - composer self-update
+  - composer install
