@@ -263,8 +263,12 @@ HEADERS;
      */
     public function test_validResponseCodeSuccess()
     {
-        $method = self::getProtectedMethod('_validResponseCode');
-        $this->assertTrue($method->invoke($this->object, 200));
+        if (-1 < version_compare(phpversion(), '5.3.2')) {
+            $method = self::getProtectedMethod('_validResponseCode');
+            $this->assertTrue($method->invoke($this->object, 200));
+        } else {
+            $this->markTestSkipped('Requires PHP >=5.3.2');
+        }
     }
 
     /**
@@ -272,8 +276,12 @@ HEADERS;
      */
     public function test_validResponseCodeRedirect()
     {
-        $method = self::getProtectedMethod('_validResponseCode');
-        $this->assertFalse($method->invoke($this->object, 301));
+        if (-1 < version_compare(phpversion(), '5.3.2')) {
+            $method = self::getProtectedMethod('_validResponseCode');
+            $this->assertFalse($method->invoke($this->object, 301));
+        } else {
+            $this->markTestSkipped('Requires PHP >=5.3.2');
+        }
     }
 
     /**
@@ -281,8 +289,12 @@ HEADERS;
      */
     public function test_validResponseCodeClientError()
     {
-        $method = self::getProtectedMethod('_validResponseCode');
-        $this->assertFalse($method->invoke($this->object, 400));
+        if (-1 < version_compare(phpversion(), '5.3.2')) {
+            $method = self::getProtectedMethod('_validResponseCode');
+            $this->assertFalse($method->invoke($this->object, 400));
+        } else {
+            $this->markTestSkipped('Requires PHP >=5.3.2');
+        }
     }
 
     /**
@@ -290,8 +302,12 @@ HEADERS;
      */
     public function test_validResponseCodeServerError()
     {
-        $method = self::getProtectedMethod('_validResponseCode');
-        $this->assertFalse($method->invoke($this->object, 500));
+        if (-1 < version_compare(phpversion(), '5.3.2')) {
+            $method = self::getProtectedMethod('_validResponseCode');
+            $this->assertFalse($method->invoke($this->object, 500));
+        } else {
+            $this->markTestSkipped('Requires PHP >=5.3.2');
+        }
     }
 
     /**
@@ -299,12 +315,16 @@ HEADERS;
      */
     public function test_buildDefaultHeaders()
     {
-        $this->object->setAccessToken(null);
-        $method = self::getProtectedMethod('_buildDefaultHeaders');
-        $this->assertEquals(
-                array('Accept: application/json'),
-                $method->invoke($this->object)
-        );
+        if (-1 < version_compare(phpversion(), '5.3.2')) {
+            $this->object->setAccessToken(null);
+            $method = self::getProtectedMethod('_buildDefaultHeaders');
+            $this->assertEquals(
+                    array('Accept: application/json'),
+                    $method->invoke($this->object)
+            );
+        } else {
+            $this->markTestSkipped('Requires PHP >=5.3.2');
+        }
     }
 
     /**
@@ -312,12 +332,16 @@ HEADERS;
      */
     public function test_buildDefaultHeadersWithAccessToken()
     {
-        $this->object->setAccessToken('1337');
-        $method = self::getProtectedMethod('_buildDefaultHeaders');
-        $this->assertEquals(
-                array('Accept: application/json', 'Authorization: OAuth 1337'),
-                $method->invoke($this->object)
-        );
+        if (-1 < version_compare(phpversion(), '5.3.2')) {
+            $this->object->setAccessToken('1337');
+            $method = self::getProtectedMethod('_buildDefaultHeaders');
+            $this->assertEquals(
+                    array('Accept: application/json', 'Authorization: OAuth 1337'),
+                    $method->invoke($this->object)
+            );
+        } else {
+            $this->markTestSkipped('Requires PHP >=5.3.2');
+        }
     }
 
     /**
@@ -325,11 +349,15 @@ HEADERS;
      */
     public function test_buildUrl()
     {
-        $method = self::getProtectedMethod('_buildUrl');
-        $this->assertEquals(
-                'https://api.soundcloud.com/v1/me',
-                $method->invoke($this->object, 'me')
-        );
+        if (-1 < version_compare(phpversion(), '5.3.2')) {
+            $method = self::getProtectedMethod('_buildUrl');
+            $this->assertEquals(
+                    'https://api.soundcloud.com/v1/me',
+                    $method->invoke($this->object, 'me')
+            );
+        } else {
+            $this->markTestSkipped('Requires PHP >=5.3.2');
+        }
     }
 
     /**
@@ -337,21 +365,25 @@ HEADERS;
      */
     public function test_buildUrlWithQueryParameters()
     {
-        $method = self::getProtectedMethod('_buildUrl');
-        $this->assertEquals(
-                'https://api.soundcloud.com/v1/tracks?q=rofl+dubstep',
-                $method->invoke(
-                        $this->object, 'tracks', array('q' => 'rofl dubstep')
-                )
-        );
-        $this->assertEquals(
-                'https://api.soundcloud.com/v1/tracks?q=rofl+dubstep&filter=public',
-                $method->invoke(
-                        $this->object,
-                        'tracks',
-                        array('q' => 'rofl dubstep', 'filter' => 'public')
-                )
-        );
+        if (-1 < version_compare(phpversion(), '5.3.2')) {
+            $method = self::getProtectedMethod('_buildUrl');
+            $this->assertEquals(
+                    'https://api.soundcloud.com/v1/tracks?q=rofl+dubstep',
+                    $method->invoke(
+                            $this->object, 'tracks', array('q' => 'rofl dubstep')
+                    )
+            );
+            $this->assertEquals(
+                    'https://api.soundcloud.com/v1/tracks?q=rofl+dubstep&filter=public',
+                    $method->invoke(
+                            $this->object,
+                            'tracks',
+                            array('q' => 'rofl dubstep', 'filter' => 'public')
+                    )
+            );
+        } else {
+            $this->markTestSkipped('Requires PHP >=5.3.2');
+        }
     }
 
     /**
@@ -360,12 +392,16 @@ HEADERS;
      */
     public function test_buildUrlWithDevelopmentDomain()
     {
-        $method = self::getProtectedMethod('_buildUrl');
-        $this->object->setDevelopment(true);
-        $this->assertEquals(
-                'https://api.sandbox-soundcloud.com/v1/me',
-                $method->invoke($this->object, 'me')
-        );
+        if (-1 < version_compare(phpversion(), '5.3.2')) {
+            $method = self::getProtectedMethod('_buildUrl');
+            $this->object->setDevelopment(true);
+            $this->assertEquals(
+                    'https://api.sandbox-soundcloud.com/v1/me',
+                    $method->invoke($this->object, 'me')
+            );
+        } else {
+            $this->markTestSkipped('Requires PHP >=5.3.2');
+        }
     }
 
     /**
@@ -374,11 +410,15 @@ HEADERS;
      */
     public function test_buildUrlWithoutApiVersion()
     {
-        $method = self::getProtectedMethod('_buildUrl');
-        $this->assertEquals(
-                'https://api.soundcloud.com/me',
-                $method->invoke($this->object, 'me', null, false)
-        );
+        if (-1 < version_compare(phpversion(), '5.3.2')) {
+            $method = self::getProtectedMethod('_buildUrl');
+            $this->assertEquals(
+                    'https://api.soundcloud.com/me',
+                    $method->invoke($this->object, 'me', null, false)
+            );
+        } else {
+            $this->markTestSkipped('Requires PHP >=5.3.2');
+        }
     }
 
     /**
@@ -386,11 +426,15 @@ HEADERS;
      */
     public function test_buildUrlWithAbsoluteUrl()
     {
-        $method = self::getProtectedMethod('_buildUrl');
-        $this->assertEquals(
-                'https://api.soundcloud.com/me',
-                $method->invoke($this->object, 'https://api.soundcloud.com/me')
-        );
+        if (-1 < version_compare(phpversion(), '5.3.2')) {
+            $method = self::getProtectedMethod('_buildUrl');
+            $this->assertEquals(
+                    'https://api.soundcloud.com/me',
+                    $method->invoke($this->object, 'https://api.soundcloud.com/me')
+            );
+        } else {
+            $this->markTestSkipped('Requires PHP >=5.3.2');
+        }
     }
 
     /**
@@ -399,12 +443,16 @@ HEADERS;
      */
     public function test_buildUrlWithoutAccessToken()
     {
-        $method = self::getProtectedMethod('_buildUrl');
-        $this->object->setAccessToken(null);
-        $this->assertEquals(
-                'https://api.soundcloud.com/v1/tracks?consumer_key=1337',
-                $method->invoke($this->object, 'tracks')
-        );
+        if (-1 < version_compare(phpversion(), '5.3.2')) {
+            $method = self::getProtectedMethod('_buildUrl');
+            $this->object->setAccessToken(null);
+            $this->assertEquals(
+                    'https://api.soundcloud.com/v1/tracks?consumer_key=1337',
+                    $method->invoke($this->object, 'tracks')
+            );
+        } else {
+            $this->markTestSkipped('Requires PHP >=5.3.2');
+        }
     }
 
     /**
@@ -413,11 +461,15 @@ HEADERS;
      */
     function test_parseHttpHeaders($rawHeaders, $expectedHeaders)
     {
-        $method        = self::getProtectedMethod('_parseHttpHeaders');
-        $parsedHeaders = $method->invoke($this->object, $rawHeaders);
+        if (-1 < version_compare(phpversion(), '5.3.2')) {
+            $method        = self::getProtectedMethod('_parseHttpHeaders');
+            $parsedHeaders = $method->invoke($this->object, $rawHeaders);
 
-        foreach ($parsedHeaders as $key => $value) {
-            $this->assertEquals($value, $expectedHeaders[$key]);
+            foreach ($parsedHeaders as $key => $value) {
+                $this->assertEquals($value, $expectedHeaders[$key]);
+            }
+        } else {
+            $this->markTestSkipped('Requires PHP >=5.3.2');
         }
     }
 

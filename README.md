@@ -1,10 +1,4 @@
-# SoundCloud PHP API Wrapper
-
-Master: [![Build Status](https://travis-ci.org/internalsystemerror/php-soundcloud.png?branch=master)](https://travis-ci.org/internalsystemerror/php-soundcloud)
-
-## RELEASE INFORMATION
-
-*v3.0.0*
+# SoundCloud PHP API Wrapper [![Build Status](https://travis-ci.org/internalsystemerror/php-soundcloud.png?branch=master)](https://travis-ci.org/internalsystemerror/php-soundcloud)
 
 ## Introduction
 
@@ -25,7 +19,7 @@ Check out the [getting started](https://github.com/mptre/php-soundcloud/wiki/OAu
  1.  Require php-soundcloud in your project's composer.json:
 
 ```sh
-composer require ise/php-soundcloud dev-master
+composer require ise/php-soundcloud 3.*
 ```
 
 
