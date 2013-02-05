@@ -1,15 +1,17 @@
 <?php
+
+namespace Soundcloud;
+
 /**
  * Soundcloud package version
  *
- * @category  Services
- * @package   Services_Soundcloud
+ * @package   Soundcloud
  * @author    Anton Lindqvist <anton@qvister.se>
  * @copyright 2010 Anton Lindqvist <anton@qvister.se>
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
  * @link      http://github.com/mptre/php-soundcloud
  */
-class Services_Soundcloud_Version
+class Version
 {
 
     const MAJOR = 2;
@@ -23,7 +25,7 @@ class Services_Soundcloud_Version
      *
      * @access public
      */
-    function __toString()
+    public function __toString()
     {
         return implode('.', array(self::MAJOR, self::MINOR, self::PATCH));
     }
