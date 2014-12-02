@@ -882,6 +882,7 @@ class Services_Soundcloud
         }
 
         if (array_key_exists(CURLOPT_POSTFIELDS, $options)
+            && is_array($options[CURLOPT_POSTFIELDS])
             && array_key_exists('track[asset_data]', $options[CURLOPT_POSTFIELDS])
         ) {
             $file = new Services_Soundcloud_File(
