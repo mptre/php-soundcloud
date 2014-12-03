@@ -37,28 +37,38 @@ class Soundcloud_Test extends PHPUnit_Framework_TestCase {
         self::assertEquals(1, $this->soundcloud->getApiVersion());
     }
 
-    function testGetAudioMimeTypes() {
+    function testGetMimeTypes() {
         $supportedExtensions = array(
-            'aac' => 'video/mp4',
-            'aiff' => 'audio/x-aiff',
-            'flac' => 'audio/flac',
-            'mp3' => 'audio/mpeg',
-            'ogg' => 'audio/ogg',
-            'wav' => 'audio/x-wav'
+            'audio' => array(
+                'aac'  => 'video/mp4',
+                'aiff' => 'audio/x-aiff',
+                'flac' => 'audio/flac',
+                'mp3'  => 'audio/mpeg',
+                'ogg'  => 'audio/ogg',
+                'wav'  => 'audio/x-wav'
+            ),
+            'image' => array(
+                'jpg'  => 'image/jpeg',
+                'jpeg' => 'image/jpeg',
+                'png'  => 'image/png',
+                'gif'  => 'image/png'
+            )
         );
-        $unsupportedExtensions = array('gif', 'html', 'jpg', 'mp4', 'xml', 'xspf');
+        $unsupportedExtensions = array('html', 'mp4', 'xml', 'xspf');
 
-        foreach ($supportedExtensions as $extension => $mimeType) {
-            self::assertEquals(
-                $mimeType,
-                $this->soundcloud->getAudioMimeType($extension)
-            );
+        foreach ($supportedExtensions as $type) {
+            foreach ($type as $extension => $mimeType) {
+                self::assertEquals(
+                    $mimeType,
+                    $this->soundcloud->getMimeType($extension, $type)
+                );
+            }
         }
 
-        foreach ($unsupportedExtensions as $extension => $mimeType) {
-            $this->setExpectedException('Services_Soundcloud_Unsupported_Audio_Format_Exception');
+        foreach ($unsupportedExtensions as $extension) {
+            $this->setExpectedException('Services_Soundcloud_Unsupported_File_Format_Exception', 'audio');
 
-            $this->soundcloud->getAudioMimeType($extension);
+            $this->soundcloud->getMimeType($extension, 'audio');
         }
     }
 

@@ -123,7 +123,7 @@ class Services_Soundcloud_Unsupported_Response_Format_Exception extends Exceptio
 }
 
 /**
- * Soundcloud unsupported audio format exception.
+ * Soundcloud unsupported file format exception.
  *
  * @category Services
  * @package Services_Soundcloud
@@ -132,7 +132,7 @@ class Services_Soundcloud_Unsupported_Response_Format_Exception extends Exceptio
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @link http://github.com/mptre/php-soundcloud
  */
-class Services_Soundcloud_Unsupported_Audio_Format_Exception extends Exception {
+class Services_Soundcloud_Unsupported_File_Format_Exception extends Exception {
 
     /**
      * Default message.
@@ -141,6 +141,22 @@ class Services_Soundcloud_Unsupported_Audio_Format_Exception extends Exception {
      *
      * @var string
      */
-    protected $message = 'The given audio format is unsupported.';
+    protected $message = 'The given %s format is unsupported.';
+
+    /**
+     * Constructor.
+     *
+     * @param string $message
+     * @param string $code
+     * @param string $httpBody
+     * @param integer $httpCode
+     *
+     * @return void
+     */
+    function __construct($type) {
+        $message = sprintf($this->message, $type);
+
+        parent::__construct($message, $code);
+    }
 
 }
