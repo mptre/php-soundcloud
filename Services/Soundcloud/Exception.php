@@ -146,10 +146,7 @@ class Services_Soundcloud_Unsupported_File_Format_Exception extends Exception {
     /**
      * Constructor.
      *
-     * @param string $message
-     * @param string $code
-     * @param string $httpBody
-     * @param integer $httpCode
+     * @param string $type
      *
      * @return void
      */
