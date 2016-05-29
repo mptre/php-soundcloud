@@ -55,7 +55,7 @@ $client = new SoundCloud\Client(
 
 The wrapper includes convenient methods used to perform HTTP requests on behalf of the authenticated user. Below you'll find a few quick examples.
 
-Ofcourse you need to handle the authentication first before being able to request and modify protect resources as demonstrated below. Therefor I refer to the [demo application](https://github.com/mptre/ci-soundcloud) which got some example code on how to handle authentication.
+Of course, you need to handle the authentication first before being able to request and modify protected resources as demonstrated below. Therefore, I refer to the [demo application](https://github.com/mptre/ci-soundcloud) which has some example code on how to handle authentication.
 
 ### GET
 
