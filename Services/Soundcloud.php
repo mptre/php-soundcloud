@@ -367,13 +367,13 @@ class Services_Soundcloud
     }
 
     /**
-     * @see Services_Soundcloud_File_Format::getAudioMimeType()
+     * @see Services_Soundcloud_File_Format::getMimeType()
      *
      * @access public
      */
-    function getAudioMimeType($extension)
+    function getMimeType($extension, $type)
     {
-        return Services_Soundcloud_File_Format::getMimeType($extension);
+        return Services_Soundcloud_File_Format::getMimeType($extension, $type);
     }
 
     /**
@@ -881,13 +881,15 @@ class Services_Soundcloud
             $includeAccessToken = true;
         }
 
-        if (array_key_exists(CURLOPT_POSTFIELDS, $options)
-            && array_key_exists('track[asset_data]', $options[CURLOPT_POSTFIELDS])
-        ) {
-            $file = new Services_Soundcloud_File(
-                $options[CURLOPT_POSTFIELDS]['track[asset_data]']
-            );
-            $options[CURLOPT_POSTFIELDS]['track[asset_data]'] = $file->getPostField();
+        if (array_key_exists(CURLOPT_POSTFIELDS, $options) && is_array($options[CURLOPT_POSTFIELDS])) {
+            $this->_curl_file_create($options[CURLOPT_POSTFIELDS], 'track[asset_data]', 'audio');
+            $this->_curl_file_create($options[CURLOPT_POSTFIELDS], 'track[artwork_data]', 'image');
+            $this->_curl_file_create($options[CURLOPT_POSTFIELDS], 'playlist[artwork_data]', 'image');
+            $this->_curl_file_create($options[CURLOPT_POSTFIELDS], 'user[avatar_data]', 'image');
+
+            if (function_exists('curl_file_create')) {
+                $options[CURLOPT_SAFE_UPLOAD] = true;
+            }
         }
 
         if (array_key_exists(CURLOPT_HTTPHEADER, $options)) {
@@ -929,6 +931,26 @@ class Services_Soundcloud
                 $this->_lastHttpResponseBody,
                 $this->_lastHttpResponseCode
             );
+        }
+    }
+
+    /**
+     * Returns an uploadable file representation
+     *
+     * @param array  $postData    post data
+     * @param string  $key  post data key
+     * @param string  $type  expected file type (audio/image)
+     *
+     * @return void
+     * @throws Services_Soundcloud_Unsupported_File_Format_Exception
+     *
+     * @access protected
+     */
+    protected function _curl_file_create(&$postData, $key, $type)
+    {
+        if(array_key_exists($key, $postData))
+        {
+            $postData[$key] = Services_Soundcloud_File::create($postData[$key], $type);
         }
     }
 

@@ -3,43 +3,33 @@
  * SoundCloud uploadable file representation class. Supports the CURLFile
  * class with graceful fallback.
  */
-if (version_compare(PHP_VERSION, '5.5.0') >= 0) {
-    class Services_Soundcloud_File extends CURLFile
+    class Services_Soundcloud_File
     {
-        function __construct($path)
+        protected static function getPostField($path, $mimeType, $name)
+        {
+            if (function_exists('curl_file_create')) {
+                return curl_file_create($path, $mimeType, $name);
+            }
+
+            return '@'.$path;
+        }
+
+        public static function create($path, $type)
         {
             if (strpos($path, '@') === 0) {
                 $path = substr($path, 1);
             }
 
             $info = pathinfo($path);
+
             $mimeType = Services_Soundcloud_File_Format::getMimeType(
-                $info['extension']
+                $info['extension'],
+                $type
             );
+
             $name = $info['basename'];
 
-            parent::__construct($path, $mimeType, $name);
-        }
-
-        function getPostField()
-        {
-            return $this;
+            return static::getPostField($path, $mimeType, $name);
         }
     }
-} else {
-    class Services_Soundcloud_File
-    {
-        private $path;
-
-        function __construct($path)
-        {
-            $this->path = $path;
-        }
-
-        function getPostField()
-        {
-            return $this->path;
-        }
-    }
-}
 ?>
