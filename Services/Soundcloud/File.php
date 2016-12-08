@@ -19,7 +19,7 @@
             if (strpos($path, '@') === 0) {
                 $path = substr($path, 1);
             }
-            
+
             $info = pathinfo($path);
 
             $mimeType = Services_Soundcloud_File_Format::getMimeType(

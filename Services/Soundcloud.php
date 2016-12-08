@@ -881,13 +881,12 @@ class Services_Soundcloud
             $includeAccessToken = true;
         }
 
-        if (array_key_exists(CURLOPT_POSTFIELDS, $options)
-            && is_array($options[CURLOPT_POSTFIELDS])
-        ) {
+        if (array_key_exists(CURLOPT_POSTFIELDS, $options) && is_array($options[CURLOPT_POSTFIELDS])) {
             $this->_curl_file_create($options[CURLOPT_POSTFIELDS], 'track[asset_data]', 'audio');
             $this->_curl_file_create($options[CURLOPT_POSTFIELDS], 'track[artwork_data]', 'image');
-            $this->_curl_file_create($options[CURLOPT_POSTFIELDS], 'track[avatar_data]', 'image');
-            
+            $this->_curl_file_create($options[CURLOPT_POSTFIELDS], 'playlist[artwork_data]', 'image');
+            $this->_curl_file_create($options[CURLOPT_POSTFIELDS], 'user[avatar_data]', 'image');
+
             if (function_exists('curl_file_create')) {
                 $options[CURLOPT_SAFE_UPLOAD] = true;
             }
