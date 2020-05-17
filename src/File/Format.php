@@ -2,6 +2,8 @@
 
 namespace SoundCloud\File;
 
+use SoundCloud\UnsupportedAudioFormatException;
+
 class Format
 {
     /**
@@ -37,7 +39,7 @@ class Format
         if (array_key_exists($extension, self::$_audioMimeTypes)) {
             return self::$_audioMimeTypes[$extension];
         } else {
-            throw new Services_Soundcloud_Unsupported_Audio_Format_Exception();
+            throw new UnsupportedAudioFormatException();
         }
     }
 }
